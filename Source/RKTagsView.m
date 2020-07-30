@@ -1,4 +1,5 @@
 #import "RKTagsView.h"
+#import "CBTokenView.h"
 
 #define DEFAULT_BUTTON_TAG -9999
 #define DEFAULT_BUTTON_HORIZONTAL_PADDING 6
@@ -14,7 +15,7 @@ const CGFloat RKTagsViewAutomaticDimension = -0.0001;
 
 @interface RKTagsView()
 @property (nonatomic, strong) NSMutableArray<NSString *> *mutableTags;
-@property (nonatomic, strong) NSMutableArray<UIButton *> *mutableTagButtons;
+@property (nonatomic, strong) NSMutableArray<CBTokenView *> *mutableTagButtons;
 @property (nonatomic, strong, readwrite) UIScrollView *scrollView;
 @property (nonatomic, strong) __RKInputTextField *inputTextField;
 @property (nonatomic, strong) UIButton *becomeFirstResponderButton;
@@ -358,7 +359,7 @@ const CGFloat RKTagsViewAutomaticDimension = -0.0001;
     if ([self.delegate respondsToSelector:@selector(tagsView:buttonForTagAtIndex:)]) {
       tagButton = [self.delegate tagsView:self buttonForTagAtIndex:index];
     } else {
-      tagButton = [UIButton new];
+      tagButton = [[CBTokenView alloc]initWithTagsView:self frame:CGRectMake(0, 0, 40, 20)];
       tagButton.layer.cornerRadius = DEFAULT_BUTTON_CORNER_RADIUS;
       tagButton.layer.borderWidth = DEFAULT_BUTTON_BORDER_WIDTH;
       tagButton.layer.borderColor = self.tintColor.CGColor;
